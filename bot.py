@@ -23,4 +23,4 @@ async def run_bot():
     print("Запуск Telegram-бота...")
     await bot.start()
     print("Бот запущен.")
-    await bot.idle()  # Поддерживает бота активным
+    await asyncio.Event().wait()  # Удерживает приложение активным
