@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import threading
-from bot import bot
+from bot import run_bot
 
 app = FastAPI()
 
@@ -9,7 +9,4 @@ def read_root():
     return {"status": "Bot is running"}
 
 # Запуск Telegram-бота в отдельном потоке
-def start_bot():
-    bot.run()
-
-threading.Thread(target=start_bot).start()
+threading.Thread(target=run_bot, daemon=True).start()
