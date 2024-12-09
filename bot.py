@@ -1,8 +1,9 @@
 from pyrogram import Client, filters
+import asyncio
 import os
 from dotenv import load_dotenv
 
-# Загрузка переменных окружения из файла .env
+# Загрузка переменных окружения
 load_dotenv()
 
 API_ID = int(os.getenv("API_ID"))
@@ -17,7 +18,9 @@ bot = Client("MAKI_Flower_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_
 def start(client, message):
     message.reply_text("Добро пожаловать в наш магазин цветов! 🌸")
 
-# Функция для запуска бота
-def run_bot():
+# Асинхронный запуск бота
+async def run_bot():
     print("Запуск Telegram-бота...")
-    bot.run()
+    await bot.start()
+    print("Бот запущен.")
+    await bot.idle()  # Поддерживает бота активным

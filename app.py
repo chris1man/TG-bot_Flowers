@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-import threading
+import asyncio
 from bot import run_bot
 
 app = FastAPI()
@@ -8,5 +8,7 @@ app = FastAPI()
 def read_root():
     return {"status": "Bot is running"}
 
-# Запуск Telegram-бота в отдельном потоке
-threading.Thread(target=run_bot, daemon=True).start()
+# Запуск Telegram-бота
+@app.on_event("startup")
+async def startup_event():
+    asyncio.create_task(run_bot())
